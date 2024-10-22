@@ -67,7 +67,7 @@ function set() {
                 const req = await getbyquery(res.query)
                 if(req?.thumbnail && req?.title){dom(req)}
             }
-            loading.innerHTML = `<div class='error'>Url is not a youtube link</div>`
+            loading.innerHTML = `<div class='error'>Video Not Found - 404</div>`
             return false
             
         }    
