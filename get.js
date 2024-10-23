@@ -40,7 +40,7 @@ async function getbyquery(query){
             headers: {'Content-Type': 'application/json'},
             body: body})
         const res = await req.json()
-        return res.all[0]
+        return res
     } catch(error) {return {error}}   
 }
 
