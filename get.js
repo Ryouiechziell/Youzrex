@@ -1,7 +1,6 @@
 function parsing(url){
-  //const youtubeRegex = /^((?:https?:)?\/\/)?(?:www\.)?(?:youtube\.com\/(?:(?:watch\?v=|embed\/|v\/)|shorts\/|playlist\?list=)|youtu\.be\/)([^#&?]*).*/;
   const youtubeRegex = /^((?:https?:)?\/\/)?(?:www\.)?(?:youtube\.com\/(?:(?:watch\?v=|embed\/|v\/)|shorts\/)|youtu\.be\/)([^#&?]*).*/;
-
+  
   if (!youtubeRegex.test(url)) {
     return {status: "query", query: url};
   }
@@ -9,10 +8,6 @@ function parsing(url){
   const videoId = match[2];
 
   return {status: "id",id: videoId};
-}
-
-function fungsi(){
-    window.open('https://www.facebook.com/muhammadnazril15')
 }
 async function getbyid(id){
     const body = JSON.stringify({id})
