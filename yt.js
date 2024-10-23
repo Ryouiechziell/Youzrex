@@ -18,37 +18,26 @@ const loading = document.querySelector(".loading")
 
 
 
-function dom(req){
-        if(!req.thumbnail || !req.title){
-        loading.innerHTML = "<div class='error'>${res.error}</div>"
-        return false
-        }
+function dom(video){
+        loading.style.display = "none"
+        thumb.setAttribute("src", video.thumbnail)
+        duration.innerText = video.timestamp
+        title.innerText = video.title
         
-        if(req.thumbnail.includes('.jpg')){
-            loading.style.display = "none"
-            thumb.setAttribute("src", req.thumbnail)
-            duration.innerText = req.timestamp
-            title.innerText = req.title
+        set_down("1080p","mp4","0",video.thumbnail,video.thumbnail)
+        set_down("720p","mp4","0",video.thumbnail,video.thumbnail)
+        set_down("480p","mp4","0",video.thumbnail,video.thumbnail)
+        set_down("360p","mp4","0",video.thumbnail,video.thumbnail)
+        set_down("240p","mp4","0",video.thumbnail,video.thumbnail)
+        set_down("144p","mp4","0",video.thumbnail,video.thumbnail)
         
-            set_down("1080p","mp4","0",req.thumbnail,req.thumbnail)
-            set_down("720p","mp4","0",req.thumbnail,req.thumbnail)
-            set_down("480p","mp4","0",req.thumbnail,req.thumbnail)
-            set_down("360p","mp4","0",req.thumbnail,req.thumbnail)
-            set_down("240p","mp4","0",req.thumbnail,req.thumbnail)
-            set_down("144p","mp4","0",req.thumbnail,req.thumbnail)
-        
-            set_down("320kbps","mp3","0",req.thumbnail,req.thumbnail)
-            set_down("256kbps","mp3","0",req.thumbnail,req.thumbnail)
-            set_down("192kbps","mp3","0",req.thumbnail,req.thumbnail)
-            set_down("128kbps","mp3","0",req.thumbnail,req.thumbnail)
+        set_down("320kbps","mp3","0",video.thumbnail,video.thumbnail)
+        set_down("256kbps","mp3","0",video.thumbnail,video.thumbnail)
+        set_down("192kbps","mp3","0",video.thumbnail,video.thumbnail)
+        set_down("128kbps","mp3","0",video.thumbnail,video.thumbnail)
             
-            video_container.style.display = "flex"
-            button.style.background = "#2c2c2c"
-            }
-        
-        loading.innerHTML = "<div class='error'>Video not found error 404</di>"
-        button.style.background = "#2c2c2c"
-            
+        video_container.style.display = "flex"
+        //button.style.background = "#2c2c2c"
 }
 
 function set() {
@@ -62,14 +51,12 @@ function set() {
             const res = parsing(input.value)
             if(res.status == "id"){
                 const req = await getbyid(res.id)
-                if(req.thumbnail && req.title){dom(req)}
+                dom(req)
             }else if(res.status == "query"){
                 const req = await getbyquery(res.query)
-                if(req?.thumbnail && req?.title){dom(req)}
+                const filter = req.all.filter(item => item.type == "video")
+                dom(filter[0])
             }
-            loading.innerHTML = `<div class='error'>Video Not Found - 404</div>`
-            return false
-            
         }    
         get()
 }  
@@ -100,7 +87,7 @@ clear.addEventListener("click",() => {
     clear.style.display = "none"
 })
 button.addEventListener("click",() => {
-    button.style.background = "#ccc"
+    //button.style.background = "#ccc"
     set()
 });
 const color = "rgb(204, 204, 204)"
