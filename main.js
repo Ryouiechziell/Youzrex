@@ -7,7 +7,7 @@ app.use(cors({origin: "*"}))
 app.use(express.json())
 
 app.get("/",(req,res) => {
-  res.send("./yt.html")
+  res.sendFile("./yt.html")
 })
 
 app.listen(process.env.PORT || 5001)
