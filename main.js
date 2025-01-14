@@ -5,10 +5,10 @@ const app = express()
 
 app.use(cors({origin: "*"}))
 app.use(express.json())
-app.use(express.static("public"))
+app.use(express.static("./"))
 
 app.get("/",(req,res) => {
-  res.sendFile("/yt.html")
+  res.send("aman lek")
 })
 
 app.listen(process.env.PORT || 5001)
